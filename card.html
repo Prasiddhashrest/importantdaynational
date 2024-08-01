@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Slider - Happy Girlfriends Day</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        :root {
+            --dark-color: #000;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --card-text: #fff;
+            --card-border: #ccc;
+            --button-bg: #00f0ff;
+            --button-text: #000;
+            --button-hover-bg: #0099cc;
+            --button-hover-text: #fff;
+            --image-card-border: #f0a;
+            --image-card-border-size: 10px;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: var(--dark-color);
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+
+        .slider-container {
+            width: 450px;
+            height: 600px;
+            overflow: hidden;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 40px;
+            width: 450px;
+            height: 600px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+            transition: transform 0.6s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card#card0 {
+            border: var(--image-card-border-size) solid var(--image-card-border);
+        }
+
+        .card h1 {
+            color: var(--card-text);
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .card p {
+            color: var(--card-text);
+            font-size: 1.5em;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        .card img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .nav-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .nav-button-prev,
+        .nav-button-next {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 15px 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            z-index: 10;
+            pointer-events: all;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-button-prev {
+            position: absolute;
+            left: 10px;
+        }
+
+        .nav-button-next {
+            position: absolute;
+            right: 10px;
+        }
+
+        .nav-button-prev:hover,
+        .nav-button-next:hover {
+            background-color: var(--button-hover-bg);
+            color: var(--button-hover-text);
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider" id="slider">
+            <div class="card" id="card0">
+                <img src="milkday.jpg" alt="Milk Day Image">
+            </div>
+            <div class="card" id="card1">
+                <h1>Happy National Girlfriends Day!</h1>
+                <p>Today is a special day to celebrate the wonderful woman in my life. Thank you for your endless love, support, and the joy you bring into my life. You make every day brighter and more beautiful, just like these flowers.</p>
+            </div>
+            <div class="card" id="card2">
+                <h1>Happy Anniversary!</h1>
+                <p>Another year of love, laughter, and unforgettable moments. Thank you for being the best partner I could ever ask for. Cheers to many more years of happiness together!</p>
+            </div>
+            <div class="card" id="card3">
+                <h1>Thank You!</h1>
+                <p>Thank you for always being there for me. Your love and support mean the world to me. I look forward to many more adventures and memories with you. Happy National Girlfriends Day!</p>
+            </div>
+            <div class="card" id="card4">
+                <h1>You Are Amazing!</h1>
+                <p>You are an incredible person, and I am so grateful to have you in my life. Your kindness, compassion, and love make every day special. Happy National Girlfriends Day! - Your forever Mocha Bear <3</p>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button class="nav-button-prev" onclick="prevCard()">❮</button>
+            <button class="nav-button-next" onclick="nextCard()">❯</button>
+        </div>
+    </div>
+
+    <script>
+        const slider = document.getElementById('slider');
+        const cards = document.querySelectorAll('.card');
+        let currentCard = 0;
+
+        function updateSliderPosition() {
+            slider.style.transform = `translateX(-${currentCard * 450}px)`;
+        }
+
+        function nextCard() {
+            if (currentCard < cards.length - 1) {
+                currentCard++;
+                updateSliderPosition();
+            }
+        }
+
+        function prevCard() {
+            if (currentCard > 0) {
+                currentCard--;
+                updateSliderPosition();
+            }
+        }
+    </script>
+</body>
+</html>
